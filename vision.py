@@ -48,33 +48,35 @@ def getCards(im, numcards=4):
 
 if __name__ == '__main__':
   
-    cap = cv2.VideoCapture(1)
+    # cap = cv2.VideoCapture(1)
     
-    while(True):
-        # Capture frame-by-frame
-        ret, frame = cap.read()
+    # while(True):
+    #     # Capture frame-by-frame
+    #     ret, frame = cap.read()
 
-        # Our operations on the frame come here
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    #     # Our operations on the frame come here
+    #     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-        # Display the resulting frame
-        cv2.imshow('frame',gray)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+    #     # Display the resulting frame
+    #     cv2.imshow('frame',gray)
+    #     if cv2.waitKey(1) & 0xFF == ord('q'):
+    #         break
 
     while(True):
         # ret, im = cap.read()
-        im = cv2.imread('kq.png')
-        # width = im.shape[0]
-        # height = im.shape[1]
+        im = cv2.imread('cards.jpg')
+        width = im.shape[0]
+        height = im.shape[1]
 
-        # if width < height:
-        #     im = cv2.transpose(im)
-        #     im = cv2.flip(im,1)
+        if width < height:
+            im = cv2.transpose(im)
+            im = cv2.flip(im,1)
 
         for i,c in enumerate(getCards(im,4)):
-            
+            cv2.imwrite(str(i) + '.png',c)
             cv2.imshow(str(i),c)
+        
+       
         cv2.waitKey(0)
         break 
         
